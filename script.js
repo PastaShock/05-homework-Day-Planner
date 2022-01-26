@@ -3,6 +3,7 @@
 // Global vars
 var calendar = document.getElementById('calendar');
 var timeTable = document.createElement('table');
+var currentDay = moment().format('YYYYDD');
 
 //I need a day to be filled out when I open the planner
 // using an array of times, fill out the page with time slots
@@ -26,7 +27,12 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
   var time = button.getAttribute('data-bs-time');
   // If necessary, you could initiate an AJAX request here
   // and then do the updating in a callback.
-  //
+  //save the modal's text to the main page
+  // $('#hour-' + time).find('.table-primary').val() = $('#task').val
+  var taskTextBox = document.getElementById('hour-' + time).getElementsByClassName('table-primary')[0]
+  var taskTextContent = document.getElementById('task').innerText;
+  taskTextBox.innerText = taskTextContent;
+  localStorage.setItem(currentDay + time, taskTextContent);
   // Update the modal's content.
   var modalTitle = exampleModal.querySelector('.modal-title');
   var modalBodyInput = exampleModal.querySelector('.modal-body input');
@@ -81,6 +87,19 @@ function colorTimeBlocks() {
   });
 }
 
+//display date on top of the planner
+function showCurrentDay() {
+  var dayContainer = document.createElement('span');
+  dayContainer.setAttribute('class', 'display 4');
+  dayContainer.textContent = 'today is ' + moment().format('DD MMM YYYY');
+  calendar.appendChild(dayContainer);
+}
+
+//save information for the hour
+function saveData() {
+
+}
+
 //get information from the local storage
 function pullLocal() {
   var rawData = localStorage.getItem('dayPlanner');
@@ -90,12 +109,15 @@ function pullLocal() {
 
 // initialize the page
 function init() {
+  // show current day
+  showCurrentDay();
   // fill the page with the elements for the day
   populateSlots(workingHours);
   // pull any saved information from the local storage
   //pullLocal();
   // color the time blocks
   colorTimeBlocks();
+
 }
 
 init();
