@@ -34,11 +34,17 @@ textarea {
   border-radius: 15px;
 }
 
-/* .row {
-  white-space: pre-wrap;
-  height: 80px;
-  border-top: 1px solid white;
-} */
+.row {
+  /* display: flex; */
+  /* width: auto; */
+  justify-content: space-between;
+  width: auto;
+}
+
+.row>* {
+  width: fit-content;
+  margin: auto 0;
+}
 
 .hour {
   background-color: #ffffff;
@@ -74,3 +80,18 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
+tr {
+  display: flex;
+  flex: auto;
+}
+
+td {
+  /* width: auto; */
+  margin: auto 0;
+}
+
+.btn {
+  width: 50px;
+  margin: 0;
+  line-height: 2em;
+}
